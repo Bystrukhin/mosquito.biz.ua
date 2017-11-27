@@ -24,6 +24,16 @@ Route::get('execute_search', [
     'uses'=>'TagController@executeSearch',
 ]);
 
+Route::get('like', [
+    'uses'=>'ArticleController@like',
+    'as'=>'comment.like'
+]);
+
+Route::get('dislike', [
+    'uses'=>'ArticleController@dislike',
+    'as'=>'comment.dislike'
+]);
+
 Route::get('filter', [
     'uses'=>'ArticleController@search',
     'as'=>'article.filter'
@@ -176,6 +186,86 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('admin/tags/add', [
             'uses' => 'AdminController@postAddTag',
             'as' => 'admin.postAddTag'
+        ]);
+
+
+        Route::get('admin/menu', [
+            'uses' => 'AdminController@getMenu',
+            'as' => 'admin.menu'
+        ]);
+        Route::get('admin/menu/{name}/{parent_id}/sub_menu', [
+            'uses' => 'AdminController@getSubMenu',
+            'as' => 'admin.subMenu'
+        ]);
+        Route::get('admin/menu/{name}/{grandparent_id}/{subMenu}/{parent_id}/sub_sub_menu', [
+            'uses' => 'AdminController@getSubSubMenu',
+            'as' => 'admin.subSubMenu'
+        ]);
+
+
+        Route::get('admin/menu/delete/{menu_id}', [
+            'uses' => 'AdminController@deleteMenu',
+            'as' => 'admin.deleteMenu'
+        ]);
+        Route::get('admin/menu/{name}/{parent_id}/{subName}/delete/{subMenu_id}', [
+            'uses' => 'AdminController@deleteSubMenu',
+            'as' => 'admin.deleteSubMenu'
+        ]);
+        Route::get('admin/menu/{name}/{grandparent_id}/{subName}/{parent_id}/{subSubName}/delete/{subSubMenu_id}', [
+            'uses' => 'AdminController@deleteSubSubMenu',
+            'as' => 'admin.deleteSubSubMenu'
+        ]);
+
+
+        Route::get('admin/menu/{name}/edit', [
+            'uses' => 'AdminController@getEditMenu',
+            'as' => 'admin.editMenu'
+        ]);
+        Route::post('admin/menu/{name}/edit', [
+            'uses' => 'AdminController@postEditMenu',
+            'as' => 'admin.postEditMenu'
+        ]);
+        Route::get('admin/menu/{name}/sub_menu/{subName}/edit', [
+            'uses' => 'AdminController@getEditSubMenu',
+            'as' => 'admin.editSubMenu'
+        ]);
+        Route::post('admin/menu/{name}/sub_menu/{subName}/edit', [
+            'uses' => 'AdminController@postEditSubMenu',
+            'as' => 'admin.postEditSubMenu'
+        ]);
+        Route::get('admin/menu/{name}/{subName}/{subSubName}/edit', [
+            'uses' => 'AdminController@getEditSubSubMenu',
+            'as' => 'admin.editSubSubMenu'
+        ]);
+        Route::post('admin/menu/{name}/{subName}/{subSubName}/edit', [
+            'uses' => 'AdminController@postEditSubSubMenu',
+            'as' => 'admin.postEditSubSubMenu'
+        ]);
+
+
+        Route::get('admin/menu/add', [
+            'uses' => 'AdminController@getAddMenu',
+            'as' => 'admin.addMenu'
+        ]);
+        Route::post('admin/menu/add', [
+            'uses' => 'AdminController@postAddMenu',
+            'as' => 'admin.postAddMenu'
+        ]);
+        Route::get('admin/menu/addSubMenu', [
+            'uses' => 'AdminController@getAddSubMenu',
+            'as' => 'admin.addSubMenu'
+        ]);
+        Route::post('admin/menu/addSubMenu', [
+            'uses' => 'AdminController@postAddSubMenu',
+            'as' => 'admin.postAddSubMenu'
+        ]);
+        Route::get('admin/menu/addSubSubMenu', [
+            'uses' => 'AdminController@getAddSubSubMenu',
+            'as' => 'admin.addSubSubMenu'
+        ]);
+        Route::post('admin/menu/addSubSubMenu', [
+            'uses' => 'AdminController@postAddSubSubMenu',
+            'as' => 'admin.postAddSubSubMenu'
         ]);
         });
     });

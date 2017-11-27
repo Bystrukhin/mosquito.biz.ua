@@ -35,7 +35,7 @@ class HomeController extends Controller
             ->groupBy('articles.id')
             ->orderBy('comments_count','desc')
             ->selectRaw('articles.*, count(comments.article_id) as comments_count')
-            ->where('comments.date', '>', \Carbon\Carbon::now()->subWeek())
+            ->where('comments.date', '>', \Carbon\Carbon::now()->subMonth())
             ->take(4)
             ->get();
 

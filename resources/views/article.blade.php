@@ -17,7 +17,7 @@
                 </li>
                     <div>
                         <h3>Tags:</h3>
-                        @foreach($tags as $tag)
+                        @foreach($article_tags as $tag)
                             @if($tag->article_id == $item->id)
                                 @foreach($tagNames as $tagName)
                                     @if($tagName->id == $tag->tag_id)
@@ -41,11 +41,63 @@
                                         <br>
                                 @endif
                             @endforeach
-                            <span>{{$comment->text}}</span>
+                            <span id="{{$comment->id}}">{{$comment->text}}</span>
+                            <br>
+                            <form class="nav navbar-nav navbar-right" action="{{route('comment.like')}}">
+                                <input type="hidden" name="comment_id" id="comment_id" value="{{$comment->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
+                                <a href="#" class="like" role="button" onclick="like()" data-link="{{ asset('like') }}"><i class="fa fa-thumbs-up" aria-hidden="true"></i>Like</a>
+                            </form>
+                            <form class="nav navbar-nav navbar-right" action="{{route('comment.dislike')}}">
+                                <input type="hidden" name="comment_id" id="comment_id" value="{{$comment->id}}">
+                                <input type="hidden" name="user_id" id="user_id" value="{{$user->id}}">
+                                <a href="#" class="dislike" role="button" onclick="dislike()" data-link="{{ asset('dislike') }}"><i class="fa fa-thumbs-down" aria-hidden="true"></i>Dislike</a>
+                            </form>
                             <br>
                             <br>
+
                             @endif
                         @endforeach
+                        <script>
+                            function like () {
+                                var url = '{{ asset('like') }}';
+                                var id = $('#comment_id').val();
+                                $.ajax({
+                                    type: 'get',
+                                    data: {id: id},
+                                    url: url,
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                                    },
+                                    success: function(response) {
+                                        console.log('success: '+response);
+                                    },
+                                    error: function(response) {
+                                        var errors = response.responseJSON;
+                                        console.log(errors);
+                                    }
+                                });
+                                }
+                            function dislike() {
+                                var url = '{{ asset('dislike') }}';
+                                var id = $('#comment_id').val();
+                                $.ajax({
+                                    type: 'get',
+                                    data: {id: id},
+                                    url: url,
+                                    headers: {
+                                        'X-CSRF-TOKEN': $('meta[name="csrf_token"]').attr('content')
+                                    },
+                                    success: function(response) {
+                                        console.log('success: '+response);
+                                    },
+                                    error: function(response) {
+                                        var errors = response.responseJSON;
+                                        console.log(errors);
+                                    }
+                                })
+                            }
+                        </script>
                     </div>
                 @endforeach
             </ul>

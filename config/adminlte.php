@@ -108,6 +108,12 @@ return [
     */
 
     'menu' => [
+        'MENU',
+        [
+            'text' => 'Menu',
+            'route' => 'admin.menu',
+            'icon' => 'file'
+        ],
         'SITE CONTENT',
         [
             'text'    => 'Manage',
@@ -132,7 +138,14 @@ return [
                     'label_color' => 'success',
                 ],
             ],
-        ]
+        ],
+        /*'COLOR SETTINGS',
+        [
+            'text'    => 'Set background color',
+            'route'       => 'admin.setBackgroundColor',
+            'icon'    => 'share',
+            'label_color' => 'success',
+        ],*/
     ],
 
     /*

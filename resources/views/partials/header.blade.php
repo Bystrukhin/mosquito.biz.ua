@@ -18,38 +18,42 @@
                     @foreach($top_menu as $top_item)
                         @if($top_item->name == 'Home')
                         <li class="active">
-                            <a href="{{ route('home.index') }}">
+                            <a href="{{ url($top_item->url) }}">
                                 <span class="fa fa-home desktop-home"></span>
                                 <span class="mobile-show">{{$top_item->name}}</span>
                             </a>
                         </li>
-                        @elseif($top_item->name == 'Categories')
+                        @elseif($top_item->child == 1)
                                 <li class="dropdown-submenu"> <a class="dropdown-toggle dropdown-item" data-toggle="dropdown" href="#" >{{$top_item->name}}</a>
                                     <ul class="nav navbar-nav dropdown-menu" role="menu">
                                         @foreach($mid_menu as $mid_item)
-                                            @if($mid_item->name !== 'Lifestyle')
+                                            @if($mid_item->top_id == $top_item->id)
+                                            @if($mid_item->child == 0)
                                         <li>
-                                            <a class="dropdown-item" href="{{ route('category.index', ['category_id' => $mid_item->url]) }}">{{$mid_item->name}}</a>
+                                            <a class="dropdown-item" href="{{ url($top_item->url.'/'.$mid_item->url) }}">{{$mid_item->name}}</a>
                                         </li>
-                                            @elseif($mid_item->name == 'Lifestyle')
+                                            @elseif($mid_item->child == 1)
                                         <li  class="dropdown-submenu">
                                             <a href="#" class="dropdown-toggle dropdown-item" data-toggle="dropdown">{{$mid_item->name}}</a>
                                             <ul class="nav navbar-nav dropdown-menu" role="menu">
                                                 @foreach($bot_menu as $bot_item)
+                                                    @if($bot_item->top_id == $top_item->id)
+                                                    @if($bot_item->mid_id == $mid_item->id)
                                                     <li>
-                                                        <a href="{{ route('category.index', ['category_id' => $bot_item->url]) }}">{{$bot_item->name}}</a>
+                                                        <a href="{{ url($top_item->url.'/'.$bot_item->url) }}">{{$bot_item->name}}</a>
                                                     </li>
+                                                    @endif
+                                                    @endif
                                                 @endforeach
                                             </ul>
                                         </li>
                                             @endif
+                                            @endif
                                         @endforeach
                                     </ul>
                                 </li>
-                        @elseif($top_item->name == 'Contacts')
-                                <li><a href="{{ route('home.getContacts') }}">{{$top_item->name}}</a></li>
-                        @elseif($top_item->name == 'About us')
-                            <li><a href="{{ route('home.getAbout') }}">{{$top_item->name}}</a></li>
+                        @elseif($top_item->child == 0)
+                                <li><a href="{{ url($top_item->url) }}">{{$top_item->name}}</a></li>
                         @endif
 
                     @endforeach
