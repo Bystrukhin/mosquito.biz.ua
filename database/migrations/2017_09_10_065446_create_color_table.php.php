@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class 20170910065446CreateColorTable.php extends Migration
+class CreateColorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,13 @@ class 20170910065446CreateColorTable.php extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('color', function (Blueprint $table) {
+            $table->engine = 'InnoDB';
+
+            $table->increments('id');
+            $table->string('name', 255);
+            $table->string('text', 255);
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class 20170910065446CreateColorTable.php extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('color');
     }
 }

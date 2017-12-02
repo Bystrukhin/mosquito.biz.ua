@@ -20,7 +20,11 @@
     <script src="{{ asset('js/respond.min.js') }}"></script>
 
 </head>
-<body>
+@foreach($color as $item)
+        @if($item->name == $colorName)
+        <body style="background-color: {{$item->text}}">
+        @endif
+@endforeach
 <div id="preloader">
     <div id="status">&nbsp;</div>
 </div>

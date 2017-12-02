@@ -1,5 +1,4 @@
 <?php
-
 Route::get('/', [
     'uses'=>'HomeController@index',
     'as'=>'home.index'
@@ -266,6 +265,15 @@ Route::group(['prefix' => 'user'], function () {
         Route::post('admin/menu/addSubSubMenu', [
             'uses' => 'AdminController@postAddSubSubMenu',
             'as' => 'admin.postAddSubSubMenu'
+        ]);
+
+        Route::get('admin/color', [
+            'uses' => 'AdminController@setColor',
+            'as' => 'admin.setColor'
+        ]);
+        Route::post('admin/color', [
+            'uses' => 'AdminController@postSetColor',
+            'as' => 'admin.postSetColor'
         ]);
         });
     });

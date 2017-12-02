@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -34,8 +35,19 @@ class AppServiceProvider extends ServiceProvider
             ->select('*')
             ->get();
 
+        $color = DB::table('color')
+            ->select('*')
+            ->get();
+
+        if (!isset($_SESSION['colorName'])) {
+            $_SESSION['colorName'] = 'white';
+            $colorName = $_SESSION['colorName'];
+        } else {
+            $colorName = $_SESSION['colorName'];
+        }
+
         view()->share(['top_menu' => $top_menu, 'mid_menu' =>$mid_menu, 'bot_menu' =>$bot_menu,
-            'tags'=>$tags, 'categories'=>$categories]);
+            'tags'=>$tags, 'categories'=>$categories, 'color'=>$color, 'colorName'=>$colorName]);
     }
 
     /**

@@ -139,13 +139,13 @@ return [
                 ],
             ],
         ],
-        /*'COLOR SETTINGS',
+        'COLOR SETTINGS',
         [
             'text'    => 'Set background color',
-            'route'       => 'admin.setBackgroundColor',
+            'route'       => 'admin.setColor',
             'icon'    => 'share',
             'label_color' => 'success',
-        ],*/
+        ],
     ],
 
     /*

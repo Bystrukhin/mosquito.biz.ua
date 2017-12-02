@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
@@ -642,6 +643,19 @@ class AdminController extends Controller
         }
 
         return redirect()->route('admin.menu');
+    }
+
+    public function setColor()
+    {
+        return view('admin.color');
+    }
+
+    public function postSetColor()
+    {
+        $colorName = Input::get('bg_color', '');
+        $_SESSION['colorName'] = $colorName;
+
+        return redirect()->back();
     }
 
 }

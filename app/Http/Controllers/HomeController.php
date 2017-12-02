@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Tag;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Session\Store;
 
 class HomeController extends Controller
 {
@@ -23,8 +24,10 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Store $session)
     {
+        $session->start();
+
         $slider = DB::table('articles')
             ->orderBy('date', 'DESC')
             ->take(5)
