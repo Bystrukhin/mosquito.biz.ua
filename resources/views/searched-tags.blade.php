@@ -1,4 +1,3 @@
 @foreach($searchTags as $searchTag)
-    <b>{{$searchTag->name}}</b>
-    <br>
+    <option value="{{$searchTag->name}}">
 @endforeach

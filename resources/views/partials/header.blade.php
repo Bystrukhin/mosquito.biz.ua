@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="header_bottom">
-                <div class="logo_area"><a href="{{ route('home.index') }}" class="logo"><img src="/mosquito/public/images/logo.jpg" alt=""></a></div>
+                <div class="logo_area"><a href="{{ route('home.index') }}" class="logo"><img src="{{ asset('images/logo.jpg') }}" alt=""></a></div>
                 <div class="add_banner"><a href="#"><img src="images/addbanner_728x90_V1.jpg" alt=""></a></div>
             </div>
         </div>
@@ -86,10 +86,10 @@
                     </li>
                 </ul>
                 <form class="nav navbar-nav navbar-right" action="{{route('tag.search')}}">
-                        <input class="search_input" placeholder="Enter your search tag..." type="text" name="search" id="search" onkeydown="down()" onkeyup="up()">
+                        <input class="search_input" placeholder="Enter your search tag..." type="text" list="tags_results" name="search" id="search" onkeydown="down()" onkeyup="up()">
                         <button class="default-btn" type="submit">Search</button>
                 </form>
-
+                <datalist class="search_results" id="tags_results"></datalist>
                 <script>
                     var timer;
 
@@ -103,7 +103,7 @@
 
                             if(keywords.length > 0) {
                                 $.get('{{ asset('execute_search') }}', {keywords: keywords}, function (markup) {
-                                    $('#search-results').html(markup);
+                                    $('#tags_results').html(markup);
                                 })
                             }
                         }, 500);
@@ -113,5 +113,4 @@
 
         </nav>
     </section>
-    <div class="search_results" id="search-results"></div>
 </header>
